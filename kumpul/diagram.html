@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Penjualan Tahunan</title>
+    <!-- Tambahkan Chart.js dari CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        canvas {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diagram Penjualan Tahunan</h1>
+    <canvas id="penjualanChart"></canvas>
+
+    <script>
+        // Data Penjualan Tahunan
+        const tahun = ['2019','2020', '2021','2022', '2023', '2024'];
+        const totalPenjualan = [300000,1000000,1300000, 1300000, 2000000, 2500000];
+
+        // Konfigurasi Chart.js
+        const ctx = document.getElementById('penjualanChart').getContext('2d');
+        const penjualanChart = new Chart(ctx, {
+            type: 'bar', // Jenis diagram: batang
+            data: {
+                labels: tahun, // Label sumbu X (tahun)
+                datasets: [{
+                    label: 'Total Penjualan (Rp)',
+                    data: totalPenjualan, // Data sumbu Y (total penjualan)
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'Rp ' + value.toLocaleString(); // Format angka
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
